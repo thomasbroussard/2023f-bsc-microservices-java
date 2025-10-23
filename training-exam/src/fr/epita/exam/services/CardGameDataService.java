@@ -12,10 +12,10 @@ public class CardGameDataService {
 
 
     public static final String SQL_CREATE_TABLE = """
-            CREATE TABLE IF NOT EXISTS CARDS(VALUE INT, COLOR VARCHAR(255))
+            CREATE TABLE IF NOT EXISTS CARDS(val INT, COLOR VARCHAR(255))
             """;
     public static final String SQL_INSERT_STATEMENT = """
-            INSERT INTO CARDS (VALUE, COLOR) VALUES (?, ?)
+            INSERT INTO CARDS (val, COLOR) VALUES (?, ?)
             """;
 
     public CardGameDataService() throws DataAccessException {
@@ -42,7 +42,7 @@ public class CardGameDataService {
     private static Connection getConnection() throws DataAccessException {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_ON_DELAY=-1");
+            connection = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
         } catch (SQLException e) {
             DataAccessException dataAccessException = new DataAccessException("unable to contact the database", e);
             throw dataAccessException;
