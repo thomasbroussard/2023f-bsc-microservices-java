@@ -17,22 +17,7 @@ public class TestB01Alternative {
         //mem: in-memory mode
         //test: database name
         CardGameDataService gameDataService = new CardGameDataService();
-
-
-        String createSQLStatement = """
-                CREATE TABLE IF NOT EXISTS CARDS(VALUE INT, COLOR VARCHAR(255))
-                """;
-        connection.prepareStatement(createSQLStatement).execute();
-        String insertCardStatement = """
-                INSERT INTO CARDS (VALUE, COLOR) VALUES (?, ?)
-                """;
-        PreparedStatement preparedStatement = connection.prepareStatement(insertCardStatement);
-        preparedStatement.setInt(1, 5);
-        preparedStatement.setString(2, "Hearts" );
-        preparedStatement.execute();
-
-
-
+        gameDataService.save(new Card("Hearts", 5));
     }
 
 }
