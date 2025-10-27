@@ -1,15 +1,13 @@
 package fr.epita.calculator.tests;
 
 import fr.epita.calculator.service.Factorial;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestFactorial {
 
-    public static void main(String[] args) {
-        nominal();
-        edge();
-    }
-
-    private static void edge() {
+    @Test
+    public void edge() {
         //given
         int number = -2;
 
@@ -20,7 +18,8 @@ public class TestFactorial {
         System.out.println("exception expected");
     }
 
-    private static void nominal() {
+    @Test
+    public void nominal() {
         //given
         int number = 5;
 
@@ -28,8 +27,6 @@ public class TestFactorial {
         int result = Factorial.factorial(number);
 
         //then
-        if (result == 120) {
-            System.out.println("test succeeded");
-        }
+        Assertions.assertEquals(120, result);
     }
 }
