@@ -12,10 +12,15 @@ public class TestFactorial {
         int number = -2;
 
         //when
-        int result = Factorial.factorial(number);
-
+        Exception collectedException = null;
+        try {
+            int result = Factorial.factorial(number);
+        }catch (Exception e) {
+            collectedException = e;
+        }
         //then
-        System.out.println("exception expected");
+        Assertions.assertNotNull(collectedException);
+        Assertions.assertTrue(collectedException instanceof IllegalArgumentException);
     }
 
     @Test
