@@ -16,12 +16,14 @@ public class Calculator {
     }
 
     public int add(String s) {
+        logger.debug("entering add with parameters {}", s);
         if ("".equals(s) || s == null) {
             logger.warn("input was empty or null");
             return 0;
         }
         String[] numbers = s.split(",");
         if (numbers.length == 1) {
+            logger.debug("returning  {}", s);
             return Integer.parseInt(s);
         } else {
             logger.error("this is not implemented");

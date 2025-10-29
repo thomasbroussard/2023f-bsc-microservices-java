@@ -37,6 +37,7 @@ Handle newlines as delimiters: "1\n2,3" → 6
     @DisplayName("Calculator.add() - when the input string is null or empty, the add(String str) method should return 0")
     void addShouldReturnZeroWhenEmptyString(){
         //given
+
         Calculator calc = new Calculator();
 
         //when
