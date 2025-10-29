@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/calculator-example/pom.xml" />
         <option value="$PROJECT_DIR$/training-exam/pom.xml" />
+        <option value="$PROJECT_DIR$/quiz-core/pom.xml" />
       </list>
     </option>
   </component>
