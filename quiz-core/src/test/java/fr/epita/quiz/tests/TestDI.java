@@ -3,7 +3,9 @@ package fr.epita.quiz.tests;
 import fr.epita.quiz.datamodel.Question;
 import fr.epita.quiz.exceptions.DataAccessException;
 import fr.epita.quiz.services.DataAccessService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,25 @@ public class TestDI {
 
     @Autowired
     DataAccessService dataAccessService;
+
+
+    @BeforeEach
+    public void before() throws SQLException {
+        String stmt = "CREATE TABLE questions (ID INT, TITLE VARCHAR(255))";
+        execute(stmt);
+    }
+
+    @AfterEach
+    public void after() throws SQLException {
+        String stmt = "DROP TABLE questions";
+        execute(stmt);
+    }
+
+    private void execute(String stmt) throws SQLException {
+        try(Connection connection = dataSource.getConnection()) {
+           connection.prepareStatement(stmt).execute();
+        }
+    }
 
     @Test
     public void test(){
