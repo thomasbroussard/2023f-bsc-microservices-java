@@ -1,16 +1,19 @@
 package fr.epita.quiz.services;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataAccessService {
 
-    public DataAccessService() throws SQLException {
-        String confEntry = ConfigurationService
-                .getInstance()
-                .getConfEntry("db.url", "");
+    private final DataSource ds;
 
-        Connection con = DriverManager.getConnection(confEntry);
+    public DataAccessService(DataSource ds) {
+        this.ds = ds;
+    }
+
+    public void create(Question question){
+
     }
 }

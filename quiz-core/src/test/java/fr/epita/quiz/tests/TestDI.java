@@ -1,5 +1,6 @@
 package fr.epita.quiz.tests;
 
+import fr.epita.quiz.services.DataAccessService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,9 @@ public class TestDI {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    DataAccessService dataAccessService;
+
     @Test
     public void test(){
         Assertions.assertNotNull(testConf);
@@ -29,6 +33,11 @@ public class TestDI {
     @Test
     public void testDatasource() throws SQLException {
         Connection connection = dataSource.getConnection();
+        Assertions.assertNotNull(connection);
+    }
+    @Test
+    public void testDataAccessService() throws SQLException {
+        Connection connection = dataAccessService.create(question);
         Assertions.assertNotNull(connection);
     }
 }
