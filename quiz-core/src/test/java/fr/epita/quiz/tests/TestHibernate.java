@@ -1,5 +1,6 @@
 package fr.epita.quiz.tests;
 
+import fr.epita.quiz.datamodel.MCQChoice;
 import fr.epita.quiz.datamodel.Question;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +30,7 @@ public class TestHibernate {
     DataSource dataSource;
 
     @Test
-    public void test() throws Exception {
+    public void testQuestion() throws Exception {
         //given
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -52,6 +53,31 @@ public class TestHibernate {
 
         assertTrue(resultSet.next(), "At least one question should be found");
         assertNotNull(resultSet.getString("TITLE"), "Question title should not be null");
+    }
+
+    @Test
+    public void testMCQChoice() throws Exception {
+        //given
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        MCQChoice choice = new MCQChoice();
+        choice.setOption("option1");
+        choice.setValid(true);
+
+        //when
+        session.persist(choice);
+
+
+        transaction.commit();
+        session.close();
+
+        //then
+        PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement("SELECT * FROM MCQCHOICES");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        assertTrue(resultSet.next(), "At least one choice should be found");
+        assertNotNull(resultSet.getString("option"), "choice option should not be null");
     }
 
 
