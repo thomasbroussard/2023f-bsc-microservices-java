@@ -27,8 +27,7 @@ public class TestDI {
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    DataAccessService dataAccessService;
+
 
 
     @BeforeEach
@@ -59,23 +58,23 @@ public class TestDI {
         Connection connection = dataSource.getConnection();
         Assertions.assertNotNull(connection);
     }
-    @Test
-    public void testDataAccessService() throws DataAccessException, SQLException {
-
-        //given
-        Question question = new Question();
-        question.setId(1);
-        question.setTitle("test question");
-
-        //when
-        dataAccessService.create(question);
-
-        //then
-        ResultSet resultSet = dataSource.getConnection().prepareStatement("SELECT count(*) FROM QUESTIONS").executeQuery();
-        resultSet.next();
-        int count = resultSet.getInt(1);
-        Assertions.assertEquals(1, count);
-
-
-    }
+//    @Test
+//    public void testDataAccessService() throws DataAccessException, SQLException {
+//
+//        //given
+//        Question question = new Question();
+//        question.setId(1);
+//        question.setTitle("test question");
+//
+//        //when
+//        dataAccessService.create(question);
+//
+//        //then
+//        ResultSet resultSet = dataSource.getConnection().prepareStatement("SELECT count(*) FROM QUESTIONS").executeQuery();
+//        resultSet.next();
+//        int count = resultSet.getInt(1);
+//        Assertions.assertEquals(1, count);
+//
+//
+//    }
 }

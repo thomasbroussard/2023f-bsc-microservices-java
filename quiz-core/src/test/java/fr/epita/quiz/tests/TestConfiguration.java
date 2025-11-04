@@ -57,9 +57,5 @@ public class TestConfiguration {
         return transactionManager;
     }
 
-    @Bean
-    public DataAccessService dataAccessService(DataSource dataSource){
-        return new DataAccessService(dataSource);
-    }
 
 }

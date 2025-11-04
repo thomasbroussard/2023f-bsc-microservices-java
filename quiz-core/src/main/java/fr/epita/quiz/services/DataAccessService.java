@@ -1,37 +1,49 @@
 package fr.epita.quiz.services;
 
+import fr.epita.quiz.datamodel.MCQAnswer;
+import fr.epita.quiz.datamodel.MCQChoice;
 import fr.epita.quiz.datamodel.Question;
-import fr.epita.quiz.exceptions.DataAccessException;
+import fr.epita.quiz.datamodel.Student;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.SessionFactory;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public class DataAccessService {
 
     private static final Logger LOGGER = LogManager.getLogger(DataAccessService.class);
 
-    private final DataSource ds;
+    private final SessionFactory sf;
 
-    public DataAccessService(DataSource ds) {
-        this.ds = ds;
+    public DataAccessService(SessionFactory sf) {
+        this.sf = sf;
     }
 
-    public void create(Question question) throws DataAccessException {
-        String sql = "INSERT INTO questions (id, title) VALUES (?, ?)";
-        try(Connection c = ds.getConnection()){
-            PreparedStatement preparedStatement = c.prepareStatement(sql);
-            preparedStatement.setInt(1, question.getId());
-            preparedStatement.setString(2, question.getTitle());
-            preparedStatement.execute();
-        }catch (SQLException e){
-            LOGGER.error(e);
-            throw new DataAccessException("error while inserting the question", e);
-        }
+
+    /*create a question + choices*/
+    public void saveQuestion(Question question, Set<MCQChoice> choices){
 
     }
+
+    public Set<MCQChoice> getChoices(Question question){
+        return null;
+    }
+
+    /*create an answer from choice + student */
+    public MCQAnswer createMCQAnswer(MCQChoice choice, Student answeringStudent){
+        return null;
+    }
+
+    public List<MCQAnswer> getMCQAnswers(Student s){
+        return null;
+    }
+
+
+
+
+
+
+
 }
