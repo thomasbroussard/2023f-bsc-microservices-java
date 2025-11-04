@@ -6,7 +6,9 @@ import fr.epita.quiz.datamodel.Question;
 import fr.epita.quiz.datamodel.Student;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +26,25 @@ public class DataAccessService {
 
     /*create a question + choices*/
     public void saveQuestion(Question question, Set<MCQChoice> choices){
+        Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.persist(question);
+            for (MCQChoice choice : choices){
+                choice.setQuestion(question);
+                session.persist(choice);
+            }
+            transaction.commit();
+        }catch(Exception e){
+            //TODO log
+            e.printStackTrace();
+        }
+        finally {
+            transaction.rollback();
+            session.close();
+        }
+
+
 
     }
 
