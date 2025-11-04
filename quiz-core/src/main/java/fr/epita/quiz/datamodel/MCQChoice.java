@@ -12,6 +12,17 @@ public class MCQChoice {
     private boolean valid;
     private String option;
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @ManyToOne
+    private Question question;
+
 
     public int getId() {
         return id;

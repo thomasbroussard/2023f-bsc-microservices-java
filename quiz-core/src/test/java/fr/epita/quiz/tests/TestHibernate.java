@@ -62,13 +62,14 @@ public class TestHibernate {
         Transaction transaction = session.beginTransaction();
 
         MCQChoice choice = new MCQChoice();
+        Question question = new Question();
+        question.setTitle("Question 1");
+        session.persist(question);
         choice.setOption("option1");
         choice.setValid(true);
 
         //when
         session.persist(choice);
-
-
         transaction.commit();
         session.close();
 
