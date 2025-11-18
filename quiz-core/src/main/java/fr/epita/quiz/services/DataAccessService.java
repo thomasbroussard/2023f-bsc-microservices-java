@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,13 +44,15 @@ public class DataAccessService {
             transaction.rollback();
             session.close();
         }
-
-
-
     }
 
     public Set<MCQChoice> getChoices(Question question){
-        return null;
+        Session session = sf.openSession();
+        Set<MCQChoice> choices = new LinkedHashSet<>(session.createQuery("from MCQChoice where question = :question",  MCQChoice.class)
+                .setParameter("question", question.getId())
+                .list());
+        session.close();
+        return choices;
     }
 
     /*create an answer from choice + student */

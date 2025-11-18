@@ -2,6 +2,8 @@ package fr.epita.quiz.datamodel;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name="MCQCHOICES")
 public class MCQChoice {
@@ -46,5 +48,17 @@ public class MCQChoice {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MCQChoice mcqChoice = (MCQChoice) o;
+        return id == mcqChoice.id && valid == mcqChoice.valid && Objects.equals(option, mcqChoice.option) && Objects.equals(question, mcqChoice.question);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, valid, option, question);
     }
 }
